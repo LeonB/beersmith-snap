@@ -1,0 +1,58 @@
+name: beersmith3
+version: 3.0.9
+summary: Beer Brewing Software
+description: |
+  Find out how to design world class beers at home, improve your brewing
+  experience and simplify your brewing day. Make mead, wine and cider as well
+  with BeerSmith. As you gain in experience, BeerSmith™ grows with you.
+grade: devel
+confinement: devmode
+base: core18
+
+parts:
+  beersmith3:
+    plugin: dump
+    source: https://s3.amazonaws.com/beersmith-3/BeerSmith-3.0.9_amd64.deb
+    after: [desktop-gtk3]
+    stage-packages:
+      - libpng16-16
+      - libwebkit2gtk-4.0-37
+      - libsm6
+
+  desktop-gtk3:
+    build-packages:
+      - build-essential
+      - libgtk-3-dev
+    make-parameters:
+      - FLAVOR=gtk3
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: gtk
+    stage-packages:
+      - libxkbcommon0
+      - ttf-ubuntu-font-family
+      - dmz-cursor-theme
+      - light-themes
+      - adwaita-icon-theme
+      - gnome-themes-standard
+      - shared-mime-info
+      - libgtk-3-0
+      - libgdk-pixbuf2.0-0
+      - libglib2.0-bin
+      - libgtk-3-bin
+      - unity-gtk3-module
+      - libappindicator3-1
+      - locales-all
+      - xdg-user-dirs
+      - ibus-gtk3
+      - libibus-1.0-5
+      - fcitx-frontend-gtk3
+
+apps:
+  beersmith3:
+    plugs:
+      - desktop
+      - x11
+      - process-control
+      - home
+    command: desktop-launch beersmith3
