@@ -6,44 +6,33 @@ description: |
   experience and simplify your brewing day. Make mead, wine and cider as well
   with BeerSmith. As you gain in experience, BeerSmith™ grows with you.
 grade: devel
-confinement: devmode
+confinement: strict
 base: core18
 
 parts:
   beersmith3:
     plugin: dump
     source: https://beersmith3-1.s3.amazonaws.com/BeerSmith-3.1.8_18.04_amd64.deb
-    # after: [bier-icon-pack]
-    # stage-packages:
-      # - libpng16-16
-      # - libwebkit2gtk-4.0-37
-      # - libsm6
+    stage-packages:
+        - libwebkit2gtk-4.0-37
+    stage:
+        # remove beersmith3 default icons
+        - -usr/share/BeerSmith3/icons
 
   bier-icon-pack:
     plugin: dump
     source: local/BIER_icon_pack_v1.0.1.zip
     # after: [beersmith3]
     organize:
-      'icons/*': usr/share/BeerSmith3/icons/
+        'icons/*': usr/share/BeerSmith3/icons/
     stage: [usr/share/BeerSmith3/icons/*]
-
-  # Find files provided by the base and platform snap and ensure they aren't
-  # duplicated in this snap
-  cleanup:
-    after: [beersmith3]
-    plugin: nil
-    build-snaps: [core18, gtk-common-themes, gnome-3-34-1804]
-    override-prime: |
-      set -eux
-      for snap in "core18" "gtk-common-themes" "gnome-3-34-1804"; do
-        cd "/snap/$snap/current" && find . -type f,l -name *.so.* -exec rm -f "$SNAPCRAFT_PRIME/{}" \;
-      done
 
 apps:
   beersmith3:
     command: usr/bin/beersmith3
     extensions: [gnome-3-34]
-    # command-chain: [bin/desktop-launch]
+    environment:
+        HOME: "$SNAP_USER_COMMON"
 
 layout:
   /usr/share/BeerSmith3:
