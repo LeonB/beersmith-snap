@@ -8,6 +8,7 @@ description: |
 grade: devel
 confinement: strict
 base: core18
+architectures: [amd64]
 
 parts:
   beersmith3:
