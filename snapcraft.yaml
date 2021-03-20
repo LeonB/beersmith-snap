@@ -32,6 +32,8 @@ apps:
   beersmith3:
     command: usr/bin/beersmith3
     extensions: [gnome-3-34]
+    plugs:
+        - network
     environment:
         HOME: "$SNAP_USER_COMMON"
 
