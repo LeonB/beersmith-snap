@@ -34,7 +34,7 @@ apps:
     extensions: [gnome-3-34]
     plugs:
         - network
-        - cups
+        - cups-control
     environment:
         HOME: "$SNAP_USER_COMMON"
 
