@@ -1,5 +1,5 @@
 name: beersmith3
-version: 3.1.8
+version: 3.2.7
 summary: Beer Brewing Software
 description: |
   Find out how to design world class beers at home, improve your brewing
@@ -7,15 +7,18 @@ description: |
   with BeerSmith. As you gain in experience, BeerSmith™ grows with you.
 grade: devel
 confinement: strict
-base: core18
+base: core20
 architectures: [amd64]
 
 parts:
   beersmith3:
     plugin: dump
-    source: https://beersmith3-1.s3.amazonaws.com/BeerSmith-3.1.8_18.04_amd64.deb
+    source: https://beersmith3-2.s3.amazonaws.com/BeerSmith-3.2.7_amd64.deb
     stage-packages:
         - libwebkit2gtk-4.0-37
+        - libtinfo5
+        - libffi7
+        - libsoup-gnome2.4-1
     stage:
         # remove beersmith3 default icons
         - -usr/share/BeerSmith3/icons
@@ -31,7 +34,7 @@ parts:
 apps:
   beersmith3:
     command: usr/bin/beersmith3
-    extensions: [gnome-3-34]
+    extensions: [gnome-3-38]
     plugs:
         - network
         - cups-control
@@ -43,3 +46,5 @@ layout:
     bind: $SNAP/usr/share/BeerSmith3
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0:
     bind: $SNAP/usr/lib/x86_64-linux-gnu/webkit2gtk-4.0
+  /usr/lib/x86_64-linux-gnu/libgtk-3:
+    bind: $SNAP/lib/x86_64-linux-gnu/libgtk-3
