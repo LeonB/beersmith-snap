@@ -5,7 +5,7 @@ description: |
   Find out how to design world class beers at home, improve your brewing
   experience and simplify your brewing day. Make mead, wine and cider as well
   with BeerSmith. As you gain in experience, BeerSmith™ grows with you.
-grade: devel
+grade: stable
 confinement: strict
 base: core20
 architectures: [amd64]
@@ -46,5 +46,3 @@ layout:
     bind: $SNAP/usr/share/BeerSmith3
   /usr/lib/x86_64-linux-gnu/webkit2gtk-4.0:
     bind: $SNAP/usr/lib/x86_64-linux-gnu/webkit2gtk-4.0
-  /usr/lib/x86_64-linux-gnu/libgtk-3:
-    bind: $SNAP/lib/x86_64-linux-gnu/libgtk-3
