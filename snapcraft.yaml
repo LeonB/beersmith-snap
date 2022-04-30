@@ -7,6 +7,8 @@ description: |
   with BeerSmith. As you gain in experience, BeerSmith™ grows with you.
 grade: stable
 confinement: strict
+contact: beersmith@beersmith.com
+website: https://beersmith.com/
 base: core20
 architectures: [amd64]
 
